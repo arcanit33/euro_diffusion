@@ -1,5 +1,6 @@
 STARTING_NUMBER_OF_COINS = 1_000_000
 PART_TO_GIVE = 1000
+DAYS = 100000
 
 class City:
     def __init__(self, x: int, y: int, balance: dict):
@@ -84,7 +85,7 @@ class DaysGoBy:
         self.days += 1
 
     def run(self):
-        while not self.check_completions() and self.days < 100000:
+        while not self.check_completions() and self.days < DAYS:
             self.next_day()
 
 
