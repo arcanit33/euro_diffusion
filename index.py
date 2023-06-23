@@ -19,6 +19,19 @@ class City:
 
         self.new_balance = {}
 
+    def distribute_money(self, money_to_give):
+        for country_name, country_value in money_to_give.items():
+            if country_name in self.new_balance:
+                self.new_balance[country_name] -= country_value * len(self.neighbors)
+            else:
+                self.new_balance[country_name] = -country_value * len(self.neighbors)
+
+            for neighbor in self.neighbors:
+                if country_name in neighbor.new_balance:
+                    neighbor.new_balance[country_name] += country_value
+                else:
+                    neighbor.new_balance[country_name] = country_value
+                    
     def is_completed(self) -> bool:
         return len(self.balance) == countries_number
 
@@ -59,28 +72,15 @@ class DaysGoBy:
 
         return all([country.is_completed() for country in self.countries])
 
-    def next_day(self):
-        for city in self.cities:
-            money_to_give = {}
+ def next_day(self):
+        money_to_give = {}
 
-            for country_name, country_value in city.balance.items():
-                if country_value // PART_TO_GIVE > 0:
-                    money_to_give[country_name] = country_value // PART_TO_GIVE
+        for country_name, country_value in self.balance.items():
+            if country_value // PART_TO_GIVE > 0:
+                money_to_give[country_name] = country_value // PART_TO_GIVE
 
-            for country_name, country_value in money_to_give.items():
-                if country_name in city.new_balance:
-                    city.new_balance[country_name] -= country_value * len(city.neighbors)
-                else:
-                    city.new_balance[country_name] = -country_value * len(city.neighbors)
-
-                for neighbor in city.neighbors:
-                    if country_name in neighbor.new_balance:
-                        neighbor.new_balance[country_name] += country_value
-                    else:
-                        neighbor.new_balance[country_name] = country_value
-
-        for city in self.cities:
-            city.add_new_balance()
+        self.distribute_money(money_to_give)
+        self.add_new_balance()
 
         self.days += 1
 
