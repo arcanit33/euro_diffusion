@@ -94,7 +94,8 @@ def validate_coordinates(xl: int, yl: int, xh: int, yh: int):
         raise ValueError("xl > xh or yl > yh")
     if xl < 0 or yl < 0 or xh < 0 or yh < 0:
         raise ValueError("xl < 0 or yl < 0 or xh < 0 or yh < 0")
-
+    if xl > 10 or yl > 10 or xh > 10 or yh > 0:
+        raise ValueError("xl > 10 or yl > 10 or xh > 10 or yh > 10")
 
 def read_case(lines, current_line, num_lines):
     countries: list[Country] = []
