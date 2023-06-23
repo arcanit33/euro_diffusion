@@ -121,6 +121,22 @@ while num != 0:
     line += num + 1
     num = int(lines[line])
 
+# case_n = 1
+# for case in cases:
+#     countries_number = len(case)
+#     game = DaysGoBy(case)
+#     game.init_neighbors()
+#     game.run()
+
+#     print('-----------------------------------')
+#     print(f'Case Number: {case_n}\n')
+#     case_n += 1
+
+#     game.countries.sort(key=lambda country: country.completion_date if country.completion_date != -1 else float('inf'))
+
+#     for country in game.countries:
+#         completion_date = country.completion_date if country.completion_date != -1 else 'N/A'
+# print(f'{country.name}: {completion_date}')
 case_n = 1
 for case in cases:
     countries_number = len(case)
@@ -132,8 +148,8 @@ for case in cases:
     print(f'Case Number: {case_n}\n')
     case_n += 1
 
-    game.countries.sort(key=lambda country: country.completion_date if country.completion_date != -1 else float('inf'))
+    sorted_countries = sorted([(country.name, country.completion_date) for country in game.countries], key=lambda x: x[0])
+    for country_name, completion_date in sorted_countries:
+        completion_date = completion_date if completion_date != -1 else 'N/A'
+print(f'{country_name}: {completion_date}')
 
-    for country in game.countries:
-        completion_date = country.completion_date if country.completion_date != -1 else 'N/A'
-        print(f'{country.name}: {completion_date}')
