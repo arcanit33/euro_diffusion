@@ -136,7 +136,7 @@ while num != 0:
 
 #     for country in game.countries:
 #         completion_date = country.completion_date if country.completion_date != -1 else 'N/A'
-# print(f'{country.name}: {completion_date}')
+#         print(f'{country.name}: {completion_date}')
 case_n = 1
 for case in cases:
     countries_number = len(case)
@@ -151,5 +151,5 @@ for case in cases:
     sorted_countries = sorted([(country.name, country.completion_date) for country in game.countries], key=lambda x: x[0])
     for country_name, completion_date in sorted_countries:
         completion_date = completion_date if completion_date != -1 else 'N/A'
-print(f'{country_name}: {completion_date}')
+        print(f'{country_name}: {completion_date}')
 
